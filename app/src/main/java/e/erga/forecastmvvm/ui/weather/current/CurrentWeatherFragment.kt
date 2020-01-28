@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import e.erga.forecastmvvm.R
-import e.erga.forecastmvvm.data.response.ApixuWeatherApiService
+import e.erga.forecastmvvm.data.db.network.response.ApixuWeatherApiService
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

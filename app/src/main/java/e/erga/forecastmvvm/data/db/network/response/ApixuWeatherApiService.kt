@@ -1,9 +1,7 @@
-package e.erga.forecastmvvm.data.response
+package e.erga.forecastmvvm.data.db.network.response
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import e.erga.forecastmvvm.data.CurrentWeatherResponse
-import e.erga.forecastmvvm.data.Location
-import e.erga.forecastmvvm.data.Request
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

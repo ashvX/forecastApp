@@ -1,4 +1,4 @@
-package e.erga.forecastmvvm.data
+package e.erga.forecastmvvm.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
