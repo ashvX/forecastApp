@@ -1,4 +1,4 @@
-package e.erga.forecastmvvm.data.db.network.response
+package e.erga.forecastmvvm.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import e.erga.forecastmvvm.data.CurrentWeatherResponse
@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.io.IOException
 
 const val API_KEY = "c54f10082c792e74aa1089d6c277d5c0"
 
@@ -24,13 +25,19 @@ interface ApixuWeatherApiService {
     //Deferred is part of Coroutines Kotlin
 
     companion object{
-        operator fun invoke():ApixuWeatherApiService{
+        operator fun invoke(
+
+            connectivityInterceptor: ConnectivityInterceptor
+
+        ): ApixuWeatherApiService {
            val requestInterceptor = Interceptor {chain ->
 
                val url = chain.request()
                    .url()
                    .newBuilder()
-                   .addQueryParameter("access_key", API_KEY)
+                   .addQueryParameter("access_key",
+                       API_KEY
+                   )
                    .build()
 
                val request = chain.request()
@@ -38,11 +45,16 @@ interface ApixuWeatherApiService {
                    .url(url)
                    .build()
 
-               return@Interceptor chain.proceed(request)
+               try {
+                   return@Interceptor chain.proceed(request)
+               } catch (e: IOException) {
+                   TODO("IOERROR")
+               }
            }
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
