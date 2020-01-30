@@ -50,7 +50,7 @@ class CurrentWeatherFragment : Fragment() {
             //val currentWeatherResponse = apiService.getCurrentWeatherAsync().await()
             //textView.text = currentWeatherResponse.toString()
 
-            weatherNetworkDataSource.fetchCurrentWeather("London")
+            weatherNetworkDataSource.fetchCurrentWeather("Bandung")
         }
     }
 }
