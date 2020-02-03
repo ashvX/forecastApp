@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
@@ -43,6 +44,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         fun bindUi() = launch{
             val currentWeather = viewModel.weather.await()
             currentWeather.observe(viewLifecycleOwner, Observer {
+                if (it == null) return@Observer
                 textView.text = it.toString()
             })
         }
